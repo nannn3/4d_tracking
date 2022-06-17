@@ -35,7 +35,6 @@ def search(map, start, end):
         openNode.sort()
         currentNode = openNode.pop(0)
         closedNode.append(currentNode)
-    #    pdb.set_trace()
         if ((currentNode) == (goal_node)):
             path = []
             while currentNode != start_node:
@@ -43,23 +42,21 @@ def search(map, start, end):
                 currentNode = currentNode.parent
             path.append(start_node.position)
             return path[::-1]
-        [x,y]=currentNode.position
+        [x,y,z]=currentNode.position
         neighbors=[
             (x,y-1,z-1),(x,y+1,z-1),(x-1,y,z-1),(x+1,y,z-1),(x-1,y-1,z-1),(x-1,y+1,z-1),(x+1,y-1,z-1),(x+1,y+1,z-1)
             (x,y-1,z),(x,y+1,z),(x-1,y,z),(x+1,y,z),(x-1,y-1,z),(x-1,y+1,z),(x+1,y-1,z),(x+1,y+1,z),
-            (x,y-1,z+1),(x,y+1,z+1),(x-1,y,z+1),(x+1,y,z+1),(x-1,y-1,z+1),(x-1,y+1,z+1),(x+1,y-1,z+1),(x+1,y+1,z+1)]
+            (x,y-1,z+1),(x,y+1,z+1),(x-1,y,z+1),(x+1,y,z+1),(x-1,y-1,z+1),(x-1,y+1,z+1),(x+1,y-1,z+1),(x+1,y+1,z+1)
+            ]
         for nextNode in neighbors:
             value=map[nextNode[1],nextNode[0],nextNode[2]]
-            #pdb.set_trace()
             if value==1:
                 continue
-            Neighbor=Node([nextNode[0],nextNode[1]],currentNode)
-           # print(Neighbor)
-           # pdb.set_trace()
+            Neighbor=Node([nextNode[0],nextNode[1],nextNode[2]],currentNode)
             if (Neighbor in closedNode):
                 continue
-            Neighbor.g = abs(Neighbor.position[0] - start_node.position[0]) + abs(Neighbor.position[1] - start_node.position[1])
-            Neighbor.h = abs(Neighbor.position[0] - goal_node.position[0]) + abs(Neighbor.position[1] - goal_node.position[1])
+            Neighbor.g = abs(Neighbor.position[0] - start_node.position[0]) + abs(Neighbor.position[1] - start_node.position[1]) + abs(Neighbor.position[2] - start_node.position[2])
+            Neighbor.h = abs(Neighbor.position[0] - goal_node.position[0]) + abs(Neighbor.position[1] - goal_node.position[1]) + abs(Neighbor.position[2]-goal_node.position[2])
             Neighbor.f = Neighbor.g + Neighbor.h
             # Check if neighbor is in open list and if it has a lower f value
             if(add_to_open(openNode, Neighbor) == True):
@@ -67,6 +64,7 @@ def search(map, start, end):
                 openNode.append(Neighbor)
     # Return None, no path is found
     return None
+
 # Check if a neighbor should be added to open list
 def add_to_open(openNode, neighbor):
     for node in openNode:
