@@ -44,9 +44,12 @@ def search(map, start, end):
             path.append(start_node.position)
             return path[::-1]
         [x,y]=currentNode.position
-        neighbors=[(x,y-1),(x,y+1),(x-1,y),(x+1,y),(x-1,y-1),(x-1,y+1),(x+1,y-1),(x+1,y+1)]
+        neighbors=[
+            (x,y-1,z-1),(x,y+1,z-1),(x-1,y,z-1),(x+1,y,z-1),(x-1,y-1,z-1),(x-1,y+1,z-1),(x+1,y-1,z-1),(x+1,y+1,z-1)
+            (x,y-1,z),(x,y+1,z),(x-1,y,z),(x+1,y,z),(x-1,y-1,z),(x-1,y+1,z),(x+1,y-1,z),(x+1,y+1,z),
+            (x,y-1,z+1),(x,y+1,z+1),(x-1,y,z+1),(x+1,y,z+1),(x-1,y-1,z+1),(x-1,y+1,z+1),(x+1,y-1,z+1),(x+1,y+1,z+1)]
         for nextNode in neighbors:
-            value=map[nextNode[1],nextNode[0]]
+            value=map[nextNode[1],nextNode[0],nextNode[2]]
             #pdb.set_trace()
             if value==1:
                 continue
