@@ -3,6 +3,15 @@ import matplotlib.pyplot as plt
 import sys
 import pdb
 np.set_printoptions(threshold=sys.maxsize) #useful for debugging
+"""
+File: tracking.py
+Author: Tristen Miller
+Summer project to eventually make 4D path planning
+"""
+
+__author__ = "Tristen Miller"
+__version__ = "0.1.0"
+__license__ = "MIT"
 
 class Node: #Format copied from https://www.annytab.com/a-star-search-algorithm-in-python/
     def __init__(self,position:(),parent:()):

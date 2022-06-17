@@ -3,6 +3,11 @@ File: dataCreate.py
 Author: Tristen Miller
 generates a 'data.txt' file with an XYZ matrix
 """
+
+__author__ = "Tristen Miller"
+__version__ = "0.1.0"
+__license__ = "MIT"
+
 def createData(x,y,z):
     print(x,y,z)
     print(range(x))
